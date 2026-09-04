@@ -31,22 +31,22 @@ int main(){
         //tính eo dùng atan2
         double goc_eo_rad=atan2(Z,X);
         double goc_eo_do=goc_eo_rad*180/3.141592;
-        cout<<"goc eo can quay la:"<<goc_eo_do<<endl;
+        cout<<"goc eo can quay la:"<<goc_eo_do<<"do"<<endl;
         //từ 3d sang 2d
         //pytago
         double X_moi=sqrt((X*X)+(Z*Z));
         //tính tổng bình phương
         double tong_binh_phuong=(X_moi*X_moi)+(Y*Y);
-        double D=(tong_binh_phuong);
+        double D_2d= sqrt(tong_binh_phuong);
         int canh_tay_vuon_dai=L1+L2;
-        if (D>canh_tay_vuon_dai)
+        if (D_2d>canh_tay_vuon_dai)
         {
-            cout<<" muc tieu qua xa, khoang cach la:"<<D<<endl;
+            cout<<" muc tieu qua xa, khoang cach la:"<<D_2d<<endl;
             cout<<"canh bao muc tieu qua xa "<<endl;
         }
         else
         {
-            cout<<"muc tieu trong tam tay, khoang cach la:"<<D<<endl;
+            cout<<"muc tieu trong tam tay, khoang cach la:"<<D_2d<<endl;
             cout<<"chuan bi tinh cac khop"<<endl;
             //tính cosin
             double tu_so=tong_binh_phuong-(L1*L1)-(L2*L2);
@@ -57,7 +57,7 @@ int main(){
             //đổi sang độ bằng toán học
             double goc_khuyu_do=goc_khuyu_rad*180/3.141592;
             //in ra màn hình
-            cout<<"goc khuyu tay can quay la:"<<goc_khuyu_do<<endl;
+            cout<<"goc khuyu tay can quay la:"<<goc_khuyu_do<<"do"<<endl;
             //tính góc hướng
             double goc_huong=atan2(Y,X_moi);
             //tính góc bù trừ
@@ -67,9 +67,12 @@ int main(){
             //tính gốc vai độ
             double goc_vai_do=goc_vai_rad*180/3.141592;
             //in ra màn hình
-            cout<<"goc vai do can quay la:"<<goc_vai_do<<endl;
+            file_data << X << "," << Y << "," << Z << "," 
+              << goc_eo_do << "," << goc_vai_do << "," << goc_khuyu_do << endl;
         }
     } 
+    file_data.close();
+     cout << "Da luu du lieu thanh cong vao file CSV!" << endl;
     return 0;
 }
 
