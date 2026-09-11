@@ -8,10 +8,11 @@ In this Version 2.0 update, the solver has been completely refactored using **Ob
 
 Instead of relying on heavy mathematical matrices (Jacobian) for multi-DOF robots, this architecture uses a Neural Network to predict base coordinates, combined with Planar Projection (Law of Cosines) for pinpoint accuracy.
 
-##  Architectural Highlights
-1. **Zero-Dependency AI Inference:** The Neural Network is written in pure, raw C++ (Multiply-Accumulate operations + ReLU activations). No external libraries (like TensorFlow or OpenCV) are used, making it 100% ready for **High-Level Synthesis (HLS)**.
-2. **OOP Multi-Instance Control:** Packaged into a `bonaoRobot` (Robot Brain) class. You can instantiate multiple limbs (`left_arm`, `right_arm`) running parallel inference simultaneously without memory collision.
-3. **Proprietary Weights:** *Note: The trained weight matrix file (`ma_tran_AI.h`) is AuraLogic IP's trade secret and is NOT included in this public repo. This code serves as an architectural demonstration of the inference pipeline.*
+## Architectural Highlights: Hybrid Neural-Analytic
+Instead of relying solely on heavy mathematical matrices (like the Jacobian) for multi-DOF robots, this architecture combines AI with exact math:
+1. **Predictive Edge AI:** A custom Neural Network Inference Engine acts as a **Predictive Model** to instantly estimate optimal target coordinates and base orientations.
+2. **Deterministic Kinematics:** The predicted data is passed into a Planar Projection solver (using the Law of Cosines) to calculate the exact joint angles with pinpoint, deterministic accuracy.
+3. **Zero-Dependency C++:** The inference pipeline (MAC loops + ReLU) is written in raw C++ without external libraries (no TensorFlow/PyTorch overhead), making it 100% ready for **High-Level Synthesis (HLS)**.
 
 ## Hardware Acceleration Roadmap
 This C++ model is strictly statically-typed. The next phase involves using Xilinx Vitis HLS to synthesize these MAC operations into FPGA DSP slices, driving latency down from milliseconds to the microsecond level.
