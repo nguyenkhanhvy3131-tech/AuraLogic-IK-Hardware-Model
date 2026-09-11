@@ -1,27 +1,20 @@
-# 🦾 AuraLogic IP: Hardware-Optimized 3D Inverse Kinematics (IK) Solver
+#  AuraLogic IP: Hardware-Optimized Edge AI & Kinematics Engine
 **Author:** Ivy Nguyen | **Company:** AuraLogic IP  
-**Status:** Prototyping (C++ Algorithmic Model)
+**Update V2.0:** Integrated Custom Neural Network Inference Engine (C++)
 
-## 📌 Project Overview
+##  Project Overview (V2.0 Update)
 Welcome to the algorithmic foundation of the **AuraLogic Kinematic Core**. 
-This repository contains a highly optimized C++ mathematical model for solving 3-DOF (Degrees of Freedom) Inverse Kinematics. It is designed from the ground up to be later synthesized into **Hardware IP Cores (FPGA/ASIC)** via HLS (High-Level Synthesis) for real-time Edge Robotics.
+In this Version 2.0 update, the solver has been completely refactored using **Object-Oriented Programming (OOP)** and integrated with a custom **Edge AI Inference Engine**. 
 
-## 🧠 Algorithmic Architecture: 3D to 2D Decoupling
-To ensure zero-latency hardware implementation, this solver avoids computationally expensive 3D spherical coordinate matrices. Instead, it utilizes the **Planar Projection (Decoupling) Technique**:
+Instead of relying on heavy mathematical matrices (Jacobian) for multi-DOF robots, this architecture uses a Neural Network to predict base coordinates, combined with Planar Projection (Law of Cosines) for pinpoint accuracy.
 
-1. **Base Rotation (1D Yaw):** Uses the hardware-friendly `atan2(Z, X)` to instantly rotate the base joint, forcing the 3D target into the robot's local 2D working plane.
-2. **Arm Articulation (2D Pitch):** Once aligned, the 3D space collapses into a flat 2D triangle. The algorithm then applies the **Law of Cosines** to resolve the Shoulder and Elbow angles.
-3. **Safety Constraints:** Includes hardware safety checks to prevent `NaN` arithmetic errors and mechanical failures when the target exceeds the arm's physical reach.
+##  Architectural Highlights
+1. **Zero-Dependency AI Inference:** The Neural Network is written in pure, raw C++ (Multiply-Accumulate operations + ReLU activations). No external libraries (like TensorFlow or OpenCV) are used, making it 100% ready for **High-Level Synthesis (HLS)**.
+2. **OOP Multi-Instance Control:** Packaged into a `bonaoRobot` (Robot Brain) class. You can instantiate multiple limbs (`left_arm`, `right_arm`) running parallel inference simultaneously without memory collision.
+3. **Proprietary Weights:** *Note: The trained weight matrix file (`ma_tran_AI.h`) is AuraLogic IP's trade secret and is NOT included in this public repo. This code serves as an architectural demonstration of the inference pipeline.*
 
-## ⚡ Why C++ for Hardware?
-Python is for prototyping, but C++ is the language of Silicon. This model is written with strict data typing (`double`, `int`) and sequential logic to prepare for a seamless transition into **RTL (Register-Transfer Level)** design. 
-By translating mathematical equations (like trigonometric functions) into hardware logic (such as CORDIC algorithms in the future), this IP core will execute IK calculations without any CPU/Software overhead.
-
-## 🚀 Next Steps (Roadmap)
-- [x] Complete 3D IK Mathematical Model (C++).
-- [ ] Implement CORDIC algorithms to replace `<cmath>` standard libraries.
-- [ ] HLS Synthesis for Xilinx/Altera FPGA platforms.
-- [ ] Performance benchmarking (Latency vs. Power consumption).
+## Hardware Acceleration Roadmap
+This C++ model is strictly statically-typed. The next phase involves using Xilinx Vitis HLS to synthesize these MAC operations into FPGA DSP slices, driving latency down from milliseconds to the microsecond level.
 
 ---
-*Engineered for the Robotics Revolution.*
+*Evaluating B2B Licensing? Please check the `LICENSE.txt` or contact me directly.*
