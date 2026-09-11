@@ -1,0 +1,16 @@
+AURALOGIC IP - EVALUATION AND NON-COMMERCIAL LICENSE
+Copyright (c) 2026 Ivy Nguyen (AuraLogic IP). All rights reserved.
+
+1. PERMITTED USE
+This software and associated documentation files (the "Software") are provided for NON-COMMERCIAL, EVALUATION, AND ACADEMIC RESEARCH PURPOSES ONLY. You are permitted to download, compile, and run this demo to evaluate the performance of AuraLogic's IP Cores.
+
+2. RESTRICTIONS
+You MAY NOT:
+- Use this Software for any commercial purpose, including but not limited to integrating it into a commercial product or service.
+- Sell, sublicense, rent, or distribute the Software to third parties.
+- Reverse engineer, decompile, or extract the proprietary weights and neural network architectures (Hardware IP) associated with this demo.
+
+3. COMMERCIAL LICENSING
+To use the AuraLogic Kinematics or Edge AI IP Cores in a commercial product, a separate Commercial License must be purchased. 
+Please contact the author for B2B Licensing, RTL/Netlist delivery, and Hardware Accelerator synthesis support.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
