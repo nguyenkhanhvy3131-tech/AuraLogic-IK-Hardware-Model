@@ -1,21 +1,23 @@
-#  AuraLogic IP: Hardware-Optimized Edge AI & Kinematics Engine
+# 🦾 AuraLogic IP: Hardware-Optimized Edge AI & Kinematics Engine
 **Author:** Ivy Nguyen | **Company:** AuraLogic IP  
-**Update V2.0:** Integrated Custom Neural Network Inference Engine (C++)
+**Update V3.0:** Upgraded to 5-DOF Humanoid Arm Architecture!
 
-##  Project Overview (V2.0 Update)
+## Project Overview (V3.0 Update)
 Welcome to the algorithmic foundation of the **AuraLogic Kinematic Core**. 
-In this Version 2.0 update, the solver has been completely refactored using **Object-Oriented Programming (OOP)** and integrated with a custom **Edge AI Inference Engine**. 
+In this update, the OOP architecture has been expanded to support a **5-DOF Humanoid Arm**. 
 
-Instead of relying on heavy mathematical matrices (Jacobian) for multi-DOF robots, this architecture uses a Neural Network to predict base coordinates, combined with Planar Projection (Law of Cosines) for pinpoint accuracy.
+To keep it hardware-friendly for future FPGA synthesis (HLS), I avoided computationally heavy Inverse Jacobian matrices. Instead, this model uses the **Wrist Decoupling** technique:
+1. Abstracting the End-Effector to find the wrist center.
+2. Reducing the remaining arm into a 2D planar triangle.
+3. Solving the Shoulder and Elbow angles cleanly using the Law of Cosines.
 
-## Architectural Highlights: Hybrid Neural-Analytic
-Instead of relying solely on heavy mathematical matrices (like the Jacobian) for multi-DOF robots, this architecture combines AI with exact math:
-1. **Predictive Edge AI:** A custom Neural Network Inference Engine acts as a **Predictive Model** to instantly estimate optimal target coordinates and base orientations.
-2. **Deterministic Kinematics:** The predicted data is passed into a Planar Projection solver (using the Law of Cosines) to calculate the exact joint angles with pinpoint, deterministic accuracy.
-3. **Zero-Dependency C++:** The inference pipeline (MAC loops + ReLU) is written in raw C++ without external libraries (no TensorFlow/PyTorch overhead), making it 100% ready for **High-Level Synthesis (HLS)**.
+## Architectural Highlights
+1. **Zero-Dependency C++:** Written in raw C++ without external heavy libraries. It is structured to be 100% ready for **High-Level Synthesis (HLS)**.
+2. **OOP Multi-Instance Control:** Packaged into a robot arm class. You can easily instantiate multiple limbs running simultaneously.
+3. **Proprietary IP Notice:** *The Field-Oriented Control (FOC) motor drivers and AI trained weights are currently kept private for a future commercial/competition prototype. This repository serves as a mathematical and architectural baseline.*
 
-## Hardware Acceleration Roadmap
-This C++ model is strictly statically-typed. The next phase involves using Xilinx Vitis HLS to synthesize these MAC operations into FPGA DSP slices, driving latency down from milliseconds to the microsecond level.
+##  Next Steps
+Tackling CORDIC algorithms to replace `<cmath>` for true RTL hardware optimization.
 
 ---
 *Evaluating B2B Licensing? Please check the `LICENSE.txt` or contact me directly.*
